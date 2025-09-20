@@ -60,12 +60,17 @@
   pre{background:#0b1220;color:#e2e8f0;border-radius:14px;padding:16px;overflow:auto;font-size:15px}
   .field{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
   .input{
-    flex:1;
-    min-width:320px;
+    width:100%;
+    max-width:100%;
     padding:18px 20px;
     border:2px solid var(--border);
     border-radius:14px;
     font-size:17px;
+    box-sizing:border-box;
+  }
+  textarea.input{
+    resize:vertical;
+    min-height:100px;
   }
   .next{
     padding:16px 20px;
@@ -76,7 +81,7 @@
     cursor:pointer;
     font-size:16px;
   }
-  .help{color:var(--muted);font-size:14px;margin-top:8px}
+  .help{color:#64748b;font-size:14px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -87,7 +92,7 @@
     <div class="stepcount">Step <b id="stepnum">1</b>/<b id="steptotal">13</b></div>
   </div>
 
-  <!-- QUESTIONS (same as before, bigger UI) -->
+  <!-- 1 Goal -->
   <div class="card step" id="step-1">
     <h2 class="q">What’s your main goal?</h2>
     <div class="grid">
@@ -98,6 +103,7 @@
     </div>
   </div>
 
+  <!-- 2 Location -->
   <div class="card step hidden" id="step-2">
     <h2 class="q">Preferred location?</h2>
     <div class="grid">
@@ -108,6 +114,7 @@
     </div>
   </div>
 
+  <!-- 3 Property type -->
   <div class="card step hidden" id="step-3">
     <h2 class="q">Property type?</h2>
     <div class="grid">
@@ -118,26 +125,30 @@
     </div>
   </div>
 
+  <!-- 4 Bedrooms -->
   <div class="card step hidden" id="step-4">
     <h2 class="q">Bedrooms needed?</h2>
     <div class="grid">
       <button class="opt" onclick="answer('bedrooms','Studio / 1+1'); nextStep();">🛏️ Studio / 1+1</button>
       <button class="opt" onclick="answer('bedrooms','2+1'); nextStep();">🛏️ 2+1</button>
       <button class="opt" onclick="answer('bedrooms','3+1'); nextStep();">🛏️ 3+1</button>
-      <button class="opt" onclick="answer('bedrooms','4+1+'); nextStep();">🛏️ 4+1+</button>
+      <button class="opt" onclick="answer('bedrooms','4+1 or more'); nextStep();">🛏️ 4+1+</button>
     </div>
   </div>
 
+  <!-- 5 Budget -->
   <div class="card step hidden" id="step-5">
     <h2 class="q">Budget range?</h2>
     <div class="grid">
-      <button class="opt" onclick="answer('budget','Up to €100k'); nextStep();">🪙 Up to €100k</button>
-      <button class="opt" onclick="answer('budget','€100k–€200k'); nextStep();">💶 €100k–€200k</button>
+      <button class="opt" onclick="answer('budget','Up to €100k (≈ $110k / £86k / ₺3.9M)'); nextStep();">🪙 Up to €100k</button>
+      <button class="opt" onclick="answer('budget','€100k–€200k (≈ $110k–$220k / £86k–£172k / ₺3.9M–₺7.8M)'); nextStep();">💶 €100k–€200k</button>
       <button class="opt" onclick="answer('budget','€200k–€500k'); nextStep();">💷 €200k–€500k</button>
       <button class="opt" onclick="answer('budget','€500k+'); nextStep();">💎 €500k+</button>
     </div>
+    <div class="help">Shown in EUR with helpful USD/GBP/TRY equivalents.</div>
   </div>
 
+  <!-- 6 Timeline -->
   <div class="card step hidden" id="step-6">
     <h2 class="q">When do you plan to buy?</h2>
     <div class="grid">
@@ -148,16 +159,18 @@
     </div>
   </div>
 
+  <!-- 7 Financing -->
   <div class="card step hidden" id="step-7">
     <h2 class="q">How will you finance the purchase?</h2>
     <div class="grid">
       <button class="opt" onclick="answer('financing','Cash'); nextStep();">💵 Cash</button>
       <button class="opt" onclick="answer('financing','Developer Installments'); nextStep();">🧱 Developer Plan</button>
-      <button class="opt" onclick="answer('financing','Bank Loan'); nextStep();">🏦 Bank Loan</button>
-      <button class="opt" onclick="answer('financing','Not sure'); nextStep();">🤷 Not sure</button>
+      <button class="opt" onclick="answer('financing','Bank Loan / Mortgage'); nextStep();">🏦 Bank Loan</button>
+      <button class="opt" onclick="answer('financing','Not sure yet'); nextStep();">🤷 Not sure yet</button>
     </div>
   </div>
 
+  <!-- 8 Residency importance -->
   <div class="card step hidden" id="step-8">
     <h2 class="q">Residence permit/citizenship importance?</h2>
     <div class="grid">
@@ -168,26 +181,29 @@
     </div>
   </div>
 
+  <!-- 9 Viewing -->
   <div class="card step hidden" id="step-9">
     <h2 class="q">Planning a viewing visit?</h2>
     <div class="grid">
       <button class="opt" onclick="answer('visit','Yes, dates fixed'); nextStep();">✈️ Yes, dates fixed</button>
       <button class="opt" onclick="answer('visit','Yes, planning soon'); nextStep();">🗓️ Planning soon</button>
-      <button class="opt" onclick="answer('visit','Want online'); nextStep();">💻 Online</button>
+      <button class="opt" onclick="answer('visit','Want online/virtual'); nextStep();">💻 Online / Virtual</button>
       <button class="opt" onclick="answer('visit','Not yet'); nextStep();">⏳ Not yet</button>
     </div>
   </div>
 
+  <!-- 10 Contact method -->
   <div class="card step hidden" id="step-10">
     <h2 class="q">Preferred contact method?</h2>
     <div class="grid">
-      <button class="opt" onclick="answer('contact','WhatsApp'); nextStep();">📱 WhatsApp</button>
-      <button class="opt" onclick="answer('contact','Phone'); nextStep();">📞 Phone</button>
-      <button class="opt" onclick="answer('contact','Email'); nextStep();">✉️ Email</button>
-      <button class="opt" onclick="answer('contact','Any'); nextStep();">🔔 Any</button>
+      <button class="opt" onclick="answer('contact_method','WhatsApp'); nextStep();">📱 WhatsApp</button>
+      <button class="opt" onclick="answer('contact_method','Phone call'); nextStep();">📞 Phone</button>
+      <button class="opt" onclick="answer('contact_method','Email'); nextStep();">✉️ Email</button>
+      <button class="opt" onclick="answer('contact_method','Any'); nextStep();">🔔 Any</button>
     </div>
   </div>
 
+  <!-- 11 Full Name -->
   <div class="card step hidden" id="step-11">
     <h2 class="q">Your full name</h2>
     <div class="field">
@@ -196,14 +212,17 @@
     </div>
   </div>
 
+  <!-- 12 Email -->
   <div class="card step hidden" id="step-12">
     <h2 class="q">Your email</h2>
     <div class="field">
       <input id="email_addr" class="input" type="email" placeholder="name@example.com" />
       <button class="next" onclick="saveText('email_addr','email'); nextStep();">Next</button>
     </div>
+    <div class="help">We’ll use this only to send property options and your session details.</div>
   </div>
 
+  <!-- 13 Notes -->
   <div class="card step hidden" id="step-13">
     <h2 class="q">Any specific question or concern?</h2>
     <div class="field">
@@ -215,6 +234,7 @@
   <!-- END -->
   <div class="card step hidden" id="step-14">
     <h2 class="q">Thanks! ✅</h2>
+    <p class="help">Below is the summary. You can send it directly to your WhatsApp.</p>
     <pre id="summary">{}</pre>
     <div class="actions">
       <a id="waSendBtn" class="btn primary" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
@@ -224,42 +244,83 @@
 </div>
 
 <script>
+  // Your WhatsApp number in international format (no + or spaces)
   const WA_NUMBER = '905425301811';
+
+  // State
   const steps = Array.from(document.querySelectorAll('.step'));
   const stepNumEl = document.getElementById('stepnum');
   const stepTotalEl = document.getElementById('steptotal');
   const barFill = document.getElementById('barfill');
   const summaryEl = document.getElementById('summary');
   const waBtn = document.getElementById('waSendBtn');
-  const QUESTION_COUNT = steps.length - 1;
+  const QUESTION_COUNT = steps.length - 1; // excluding summary
   stepTotalEl.textContent = QUESTION_COUNT;
+
   const answers = {};
   let current = 1;
 
+  // Helpers
   function show(n){
     steps.forEach((s,i)=> s.classList.toggle('hidden', (i !== n-1)));
     stepNumEl.textContent = Math.min(n, QUESTION_COUNT);
     barFill.style.width = Math.round(((n-1)/QUESTION_COUNT)*100) + '%';
   }
-  function answer(k,v){answers[k]=v;}
-  function saveText(id,k){const el=document.getElementById(id);if(el&&el.value.trim()){answers[k]=el.value.trim();}}
-  function copySummary(){navigator.clipboard?.writeText(summaryEl.textContent);alert('Summary copied!');}
-  function buildMsg(a){
-    return `New Buyer Survey\n----------------------\nName: ${a.name||'-'}\nEmail: ${a.email||'-'}\nGoal: ${a.goal||'-'}\nLocation: ${a.location||'-'}\nType: ${a.type||'-'}\nBedrooms: ${a.bedrooms||'-'}\nBudget: ${a.budget||'-'}\nTimeline: ${a.timeline||'-'}\nFinancing: ${a.financing||'-'}\nResidency: ${a.residency||'-'}\nViewing: ${a.visit||'-'}\nContact: ${a.contact||'-'}\n\nNotes: ${a.notes||'-'}`;
+  function answer(k,v){ answers[k] = v; }
+  function saveText(id,k){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const val = (el.value || '').trim();
+    if(!val && (k==='name' || k==='email')){ el.focus(); return; }
+    answers[k] = val;
   }
-  function makeWaUrl(t){return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t)}`;}
+  function copySummary(){
+    navigator.clipboard?.writeText(summaryEl.textContent);
+    alert('Summary copied!');
+  }
+  function buildMsg(a){
+    return [
+      'New Buyer Survey (Turkey & Northern Cyprus)',
+      '----------------------------------------',
+      `Name: ${a.name||'-'}`,
+      `Email: ${a.email||'-'}`,
+      `Goal: ${a.goal||'-'}`,
+      `Location: ${a.location||'-'}`,
+      `Type: ${a.type||'-'}`,
+      `Bedrooms: ${a.bedrooms||'-'}`,
+      `Budget: ${a.budget||'-'}`,
+      `Timeline: ${a.timeline||'-'}`,
+      `Financing: ${a.financing||'-'}`,
+      `Residency: ${a.residency||'-'}`,
+      `Viewing: ${a.visit||'-'}`,
+      `Contact Method: ${a.contact_method||'-'}`,
+      '',
+      `Notes: ${a.notes||'-'}`
+    ].join('\n');
+  }
+  function makeWaUrl(text){
+    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+  }
+
+  // Navigation
   function nextStep(){
     current++;
-    if(current>steps.length) current=steps.length;
-    if(current===steps.length){
-      const msg=buildMsg(answers);
-      summaryEl.textContent=msg;
-      const waUrl=makeWaUrl(msg);
-      waBtn.setAttribute('href',waUrl);
-      setTimeout(()=>{window.open(waUrl,'_blank');},200);
+    if(current > steps.length) current = steps.length;
+
+    // When we reach the summary
+    if(current === steps.length){
+      const msg = buildMsg(answers);
+      summaryEl.textContent = msg;
+      const waUrl = makeWaUrl(msg);
+      waBtn.setAttribute('href', waUrl);
+
+      // Try to auto-open WhatsApp (browser may block; button is fallback)
+      setTimeout(()=>{ window.open(waUrl, '_blank'); }, 200);
     }
     show(current);
   }
+
+  // Init
   show(1);
 </script>
 </body>
