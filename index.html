@@ -1,0 +1,156 @@
+<!-- ====== MULTI-STEP CARD SURVEY (Stable Version) ====== -->
+<div id="survey" class="svy">
+  <!-- Progress -->
+  <div class="svy-progress">
+    <div class="svy-progress-bar" style="width:0%"></div>
+    <div class="svy-progress-label">Step <span class="svy-step">1</span>/<span class="svy-total">3</span></div>
+  </div>
+
+  <!-- Track -->
+  <div class="svy-track">
+    <!-- Q1 -->
+    <section class="svy-slide" data-question-id="goal" data-step="1">
+      <div class="svy-card">
+        <h2 class="svy-q">What’s your main goal?</h2>
+        <div class="svy-options">
+          <button type="button" class="svy-option" data-value="Holiday Home">🏖️ Holiday Home</button>
+          <button type="button" class="svy-option" data-value="Investment / Rental">💼 Investment / Rental</button>
+          <button type="button" class="svy-option" data-value="Relocation">🏠 Relocation</button>
+          <button type="button" class="svy-option" data-value="Residence Permit">🛂 Residence Permit</button>
+        </div>
+        <button type="button" class="svy-next" aria-label="Next">Next</button>
+      </div>
+    </section>
+
+    <!-- Q2 -->
+    <section class="svy-slide" data-question-id="location" data-step="2">
+      <div class="svy-card">
+        <h2 class="svy-q">Preferred location?</h2>
+        <div class="svy-options">
+          <button type="button" class="svy-option" data-value="Istanbul">🌆 Istanbul</button>
+          <button type="button" class="svy-option" data-value="Antalya / Alanya">🌴 Antalya / Alanya</button>
+          <button type="button" class="svy-option" data-value="Northern Cyprus">🌊 Northern Cyprus</button>
+          <button type="button" class="svy-option" data-value="Not Sure Yet">🤔 Not Sure Yet</button>
+        </div>
+        <button type="button" class="svy-next" aria-label="Next">Next</button>
+      </div>
+    </section>
+
+    <!-- Q3 -->
+    <section class="svy-slide" data-question-id="budget" data-step="3">
+      <div class="svy-card">
+        <h2 class="svy-q">Budget range?</h2>
+        <div class="svy-options">
+          <button type="button" class="svy-option" data-value="Up to €100k">🪙 Up to €100k</button>
+          <button type="button" class="svy-option" data-value="€100k–€200k">💶 €100k–€200k</button>
+          <button type="button" class="svy-option" data-value="€200k–€500k">💷 €200k–€500k</button>
+          <button type="button" class="svy-option" data-value="€500k+">💎 €500k+</button>
+        </div>
+        <button type="button" class="svy-next" aria-label="Next">Finish</button>
+      </div>
+    </section>
+
+    <!-- END -->
+    <section class="svy-slide svy-end" data-step="4">
+      <div class="svy-card">
+        <h2 class="svy-q">Thanks! ✅</h2>
+        <p class="svy-sub">Summary of your answers:</p>
+        <pre class="svy-summary">{}</pre>
+        <div class="svy-actions">
+          <a class="svy-cta" href="/thank-you">Go to Thank-You Page</a>
+          <a class="svy-cta ghost" href="https://wa.me/XXXXXXXXXXX" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<style>
+  .svy { --card:#fff; --muted:#64748b; --text:#0f172a; --brand:#f15a29; --brand2:#ff8a50; --radius:18px; --shadow:0 10px 30px rgba(15,23,42,.12); }
+  .svy * { box-sizing:border-box; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  .svy-progress { position:relative; height:10px; background:#e5e7eb; border-radius:999px; margin:16px auto 24px; max-width:860px; }
+  .svy-progress-bar { height:10px; background:linear-gradient(90deg,var(--brand),var(--brand2)); border-radius:999px; transition:width .4s ease; }
+  .svy-progress-label { position:absolute; top:-26px; right:0; font-size:12px; color:var(--muted); }
+  .svy-track { display:flex; width:100%; max-width:960px; margin:0 auto; overflow:hidden; transition: transform .45s cubic-bezier(.22,.61,.36,1); }
+  .svy-slide { min-width:100%; padding:10px; display:flex; justify-content:center; }
+  .svy-card { width:100%; max-width:860px; background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px; border:1px solid #e5e7eb; }
+  .svy-q { margin:0 0 18px; font-size:22px; line-height:1.3; }
+  .svy-sub { color:var(--muted); margin:0 0 16px; }
+  .svy-options { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:10px; }
+  @media(min-width:720px){ .svy-options { grid-template-columns:repeat(4,1fr); } }
+  .svy-option { padding:16px 12px; border:1px solid #e5e7eb; background:#fff; border-radius:16px; cursor:pointer; font-size:15px; text-align:center;
+                transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+  .svy-option:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(15,23,42,.08); border-color:#d1d5db; }
+  .svy-next { display:none; margin-top:8px; padding:12px 16px; border-radius:12px; border:1px solid var(--brand); background:#fff; color:var(--brand); cursor:pointer; }
+  .svy-end .svy-next { display:none !important; }
+  .svy-summary { background:#0b1220; color:#e2e8f0; border-radius:12px; padding:14px; overflow:auto; font-size:13px; }
+  .svy-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .svy-cta { display:inline-block; padding:12px 16px; border-radius:12px; text-decoration:none; color:#fff; background:linear-gradient(90deg,var(--brand),var(--brand2)); }
+  .svy-cta.ghost { background:transparent; color:var(--brand); border:1px solid var(--brand); }
+</style>
+
+<script>
+(function(){
+  const survey = document.getElementById('survey');
+  if(!survey){ console.warn('Survey root not found'); return; }
+
+  const track = survey.querySelector('.svy-track');
+  const slides = Array.from(survey.querySelectorAll('.svy-slide'));
+  const progressBar = survey.querySelector('.svy-progress-bar');
+  const stepLabel = survey.querySelector('.svy-step');
+  const totalLabel = survey.querySelector('.svy-total');
+  const summaryEl = survey.querySelector('.svy-summary');
+
+  const questionSlides = slides.filter(s => !s.classList.contains('svy-end'));
+  const total = questionSlides.length;
+  totalLabel.textContent = total;
+
+  let idx = 0;
+  const answers = {};
+
+  function gotoSlide(n){
+    idx = Math.max(0, Math.min(n, slides.length-1));
+    const offsetPct = -idx * 100;
+    track.style.transform = 'translateX(' + offsetPct + '%)';
+    // progress reflects question steps only
+    const shownStep = Math.min(idx + 1, total);
+    stepLabel.textContent = shownStep;
+    const pct = Math.round((idx / total) * 100);
+    progressBar.style.width = Math.min(100, pct) + '%';
+    console.log('gotoSlide', { idx, offsetPct });
+  }
+
+  function showSummary(){
+    summaryEl.textContent = JSON.stringify(answers, null, 2);
+  }
+
+  function bindSlide(slide){
+    const qid = slide.getAttribute('data-question-id');
+    const options = Array.from(slide.querySelectorAll('.svy-option'));
+    const nextBtn = slide.querySelector('.svy-next');
+
+    // Fallback next button (visible only if no option clicked after 1.5s)
+    if(nextBtn){
+      setTimeout(()=>{ nextBtn.style.display = 'inline-block'; }, 1500);
+      nextBtn.addEventListener('click', () => {
+        console.log('Next clicked (fallback)');
+        gotoSlide(idx + 1);
+        if(slides[idx].classList.contains('svy-end')) showSummary();
+      });
+    }
+
+    options.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-value') || btn.textContent.trim();
+        if(qid){ answers[qid] = val; }
+        console.log('Answer chosen', { qid, val, idx });
+        gotoSlide(idx + 1);
+        if(slides[idx].classList.contains('svy-end')) showSummary();
+      }, { passive:true });
+    });
+  }
+
+  slides.forEach(bindSlide);
+  gotoSlide(0);
+})();
+</script>
